@@ -11,5 +11,7 @@ Members: Neeraja Beesetti, Maxwell Huang, Jasmine Luu, Kerwin Huang, Will Choi
 fullertonhousing.org
 
 Directions:
+1) npm install tailwindcss
+2) npx tailwindcss -i ./styles.css -o ./output.css --watch
 
-npx tailwindcss -i ./styles.css -o ./output.css --watch
+- Install Live Server extension for reload on change
