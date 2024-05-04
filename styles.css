@@ -20,7 +20,7 @@
 
 @layer components {
   .navbar {
-    @apply bg-green-600 py-2.5 flex justify-between items-center; /* Adjusted from padding: 10px */
+    @apply bg-dark-blue py-2.5 flex justify-between items-center; /* Adjusted from padding: 10px */
   }
 
   .logo {
@@ -32,19 +32,50 @@
   }
 
   .navbar ul li {
-    @apply px-4; /* Adjusted from padding: 0 15px */
+    @apply px-10; /* Adjusted from padding: 0 15px */
   }
 
   .navbar ul li a {
     @apply no-underline text-white;
   }
 
-  .search-bar {
-    @apply p-1; /* Adjusted from padding: 5px */
+  /* SEARCH START */
+
+  .search-container {
+    display: flex;
+    align-items: center;
+    @apply px-5;
+  }
+  
+  .search-icon {
+    cursor: pointer;
+    width: 2.5rem;
+    height: 2.5rem;
+    @apply rounded-md;
+  }
+  
+  .search-input {
+    width: 0;
+    padding: 0;
+    border: none;
+    transition: width 0.4s ease-out, padding 0.2s ease-out;
+    opacity: 0;
+    @apply rounded-md;
+  }
+  
+  .search-input.expanded {
+    padding: 10px;
+    width: 200px;
+    opacity: 1;
+    @apply rounded-md ml-3;
   }
 
+    /* SEARCH END */
+
+  
+
   .hero-section {
-    @apply bg-blue-400 py-12 text-center; /* Adjusted colors and padding */
+    @apply text-center; /* Adjusted colors and padding */
   }
 
   .content-section {
