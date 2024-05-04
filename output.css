@@ -576,12 +576,15 @@ body {
   background-color: rgb(7 28 50 / var(--tw-bg-opacity));
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
   /* Adjusted from padding: 10px */
 }
 
 .logo {
-  font-size: 1.5rem;
-  line-height: 2rem;
+  height: 3.5rem;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
@@ -608,8 +611,6 @@ body {
 .search-container {
   display: flex;
   align-items: center;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
 }
 
 .search-icon {
@@ -702,11 +703,6 @@ body {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
   /* Adjusted padding */
-}
-
-.text-blue-500 {
-  --tw-text-opacity: 1;
-  color: rgb(59 130 246 / var(--tw-text-opacity));
 }
 
 .text-blue-300 {

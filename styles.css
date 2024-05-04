@@ -20,11 +20,11 @@
 
 @layer components {
   .navbar {
-    @apply bg-dark-blue py-2.5 flex justify-between items-center; /* Adjusted from padding: 10px */
+    @apply bg-dark-blue py-2.5 flex justify-between items-center px-5 text-base; /* Adjusted from padding: 10px */
   }
 
   .logo {
-    @apply text-white text-2xl;
+    @apply text-white h-14;
   }
 
   .navbar ul {
@@ -44,7 +44,6 @@
   .search-container {
     display: flex;
     align-items: center;
-    @apply px-5;
   }
   
   .search-icon {
@@ -72,7 +71,6 @@
 
     /* SEARCH END */
 
-  
 
   .hero-section {
     @apply text-center; /* Adjusted colors and padding */
