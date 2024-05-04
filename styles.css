@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Use @layer directive for Custom Styles */
+@layer base {
+  /* Applying default box-sizing, padding, and margin reset across all elements can be 
+     handled by Tailwind itself, so you typically wouldn't need to repeat it here. 
+     For illustration, here's how you could add a custom global style if needed: */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    /* Tailwind uses the system font stack by default, which includes Arial,
+       so you might not need to explicitly set the font-family to Arial */
+    font-family: theme('fontFamily.sans');
+  }
+}
+
+@layer components {
+  .navbar {
+    @apply bg-green-600 py-2.5 flex justify-between items-center; /* Adjusted from padding: 10px */
+  }
+
+  .logo {
+    @apply text-white text-2xl;
+  }
+
+  .navbar ul {
+    @apply list-none flex;
+  }
+
+  .navbar ul li {
+    @apply px-4; /* Adjusted from padding: 0 15px */
+  }
+
+  .navbar ul li a {
+    @apply no-underline text-white;
+  }
+
+  .search-bar {
+    @apply p-1; /* Adjusted from padding: 5px */
+  }
+
+  .hero-section {
+    @apply bg-blue-400 py-12 text-center; /* Adjusted colors and padding */
+  }
+
+  .content-section {
+    @apply flex flex-wrap justify-between;
+  }
+
+  .text-section,
+  .image-section {
+    @apply w-1/2 p-5; /* Adjusted width and padding */
+  }
+
+  .text-section {
+    @apply bg-gray-200;
+  }
+
+  .image-section {
+    @apply bg-green-600; /* Adjusted color */
+  }
+
+  .button {
+    @apply py-2.5 px-5 bg-purple-700 text-white no-underline inline-block mt-5; /* Adjusted paddings */
+  }
+
+  .heading {
+    @apply py-12 bg-purple-600 text-white text-center; /* Adjusted padding */
+  }
+
+  .footer {
+    @apply bg-green-600 py-5 text-center; /* Adjusted padding */
+  }
+}
