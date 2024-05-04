@@ -104,6 +104,6 @@
   }
 
   .footer {
-    @apply bg-green-600 py-5 text-center; /* Adjusted padding */
+    @apply bg-dark-blue py-5 text-center text-white; /* Adjusted padding */
   }
 }
