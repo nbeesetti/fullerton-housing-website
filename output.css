@@ -640,8 +640,29 @@ body {
 /* SEARCH END */
 
 .hero-section {
-  text-align: center;
-  /* Adjusted colors and padding */
+  display: flex;
+  height: 60vh;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+  background-image: url('/imgs/fullerton.png');
+}
+
+.hero-text-bg {
+  border-radius: 0.5rem;
+  background-color: rgba(0,0,0,0.6);
+  padding: 1rem;
+}
+
+.hero-text {
+  font-size: 3.75rem;
+  line-height: 1;
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .content-section {
@@ -705,9 +726,23 @@ body {
   /* Adjusted padding */
 }
 
+.text-6xl {
+  font-size: 3.75rem;
+  line-height: 1;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
 .text-blue-300 {
   --tw-text-opacity: 1;
   color: rgb(147 197 253 / var(--tw-text-opacity));
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 /* Use @layer directive for Custom Styles */
