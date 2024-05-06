@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News</title>
+  <link href="output.css" rel="stylesheet">
+  <style>
+    /* Style for the picture section */
+    .picture-section {
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      height: 300px;
+      /* CAN CHANGE HEIGHT LATER */
+      text-align: center;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Style for the text overlay */
+    .text-overlay {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      /* Transparent background */
+      padding: 40px;
+      font-size: 36px;
+    }
+
+    /* Style for the section containers */
+    .section-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px; /* Add padding to give some space */
+    }
+
+    .section {
+      width: 70%;
+      /* Adjust width as needed */
+      margin-bottom: 30px;
+      display: flex;
+    }
+
+    .image-section,
+    .text-section {
+      width: 50%;
+      height: 200px;
+      /* Adjust height as needed */
+      background-size: cover;
+      background-position: center;
+    }
+
+    .image-section {
+      background-image: url('CHANGELATER.jpg');
+      /* Replace with actual image URL */
+    }
+
+    .text-section {
+      padding: 10px;
+      background-color: #f9f9f9;
+    }
+
+    /* Align blue and white sections left and right */
+    .image-section {
+      order: 1;
+    }
+
+    .text-section {
+      order: 2;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="navbar">
+
+    <a href="/">
+      <img class="logo" src="imgs/logo.png" alt="Temporary OC United Logo">
+    </a>
+
+    <ul>
+      <li page="about"><a href="about.html">ABOUT US</a></li>
+      <li page="faq"><a href="faq.html">FAQ</a></li>
+      <li page="allies"><a href="allies.html">ALLIES</a></li>
+      <li page="videos"><a href="videos.html">VIDEOS</a></li>
+      <li page="news"><a href="news.html" class="tab-active">NEWS</a></li>
+    </ul>
+
+    <div class="search-container">
+      <img class="search-icon w-" src="imgs/search-icon.jpg" alt="Search" onclick="expandSearch()">
+      <input type="text" class="search-input" placeholder="Search...">
+    </div>
+
+  </div>
+
+  <div class="heading">
+    <!-- Heading Content Here -->
+  </div>
+
+  <!-- Picture section -->
+  <div class="picture-section">
+    <div class="text-overlay">
+      <h1>Recent News and Events</h1>
+    </div>
+  </div>
+
+  <!-- Section containers for images and text -->
+  <div class="section-container">
+    <!-- Section 1 -->
+    <div class="section">
+      <div class="image-section"></div>
+      <div class="text-section">
+        <!-- Text Content -->
+        <p>News/Event article</p>
+        <a class="button" href="#">Link to article/event information</a>
+      </div>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="section">
+      <div class="image-section"></div>
+      <div class="text-section">
+        <!-- Text Content -->
+        <p>News/Event article#2</p>
+        <a class="button" href="#">Link to article/event information</a>
+      </div>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="section">
+      <div class="image-section"></div>
+      <div class="text-section">
+        <!-- Text Content -->
+        <p>News/Event article#3</p>
+        <a class="button" href="#">Link to article/event information</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>© 2024 Fullerton Housing Alliance | Licensed under the <a
+        href="https://github.com/nbeesetti/fullerton-housing-website?tab=GPL-3.0-1-ov-file#readme"
+        class="text-blue-300">GPL 3.0 License</a>
+    </p>
+
+    <p>View Source on <a href="https://github.com/nbeesetti/fullerton-housing-website" class="text-blue-300">GitHub</a>
+      | Join our
+      <a href="https://ocunited.org/" class="text-blue-300">Community</a>
+    </p>
+
+    <p>Developed by UC Irvine INF 117 Spring 2024 Team</p>
+  </footer>
+
+  <script src="index.js"></script>
+
+</body>
+
+</html>
