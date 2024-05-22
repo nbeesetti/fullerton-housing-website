@@ -15,4 +15,4 @@ function fetch_youtube_videos($search_query) {
     $data = json_decode($body, true);
 
     return $data['items'] ?? [];
-}
+} 
