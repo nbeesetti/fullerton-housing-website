@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        #search-query, #message {
+            font-size: 1em;
+            margin-bottom: 20px;
+            color: #555;
+            text-align: center;
+        }
+        #results {
+            position: relative;
+            width: 100%;
+            padding: 0 20px;
+        }
+        #results ul {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+        }
+        #results li {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+        #results li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .player-container {
+            width: 100%;
+            max-width: 800px;
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .player-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+        .occurrences-dropdown-container {
+            display: flex;
+            align-items: center; /* Centering label and dropdown */
+            justify-content: center; /* Centering horizontally */
+            width: 100%; /* Ensure it takes the full width */
+            margin-top: 10px;
+        }
+        .occurrences-label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .timestamps-dropdown {
+            max-height: 200px;
+            overflow-y: auto;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .timestamps-dropdown select {
+            width: auto; /* Allow the dropdown to auto-size */
+            padding: 5px 10px;
+            font-size: 1em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="search-query"></div>
+    <div id="results"></div>
+    <div id="message"></div>
+    <script>
+        let searchData = [];
+        
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+        
+        function displayMessage(type, message) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = message;
+            messageDiv.style.color = type === 'success' ? 'green' : 'red';
+        }
+        
+        async function fetchSearchResults(query) {
+            try {
+                const response = await fetch(`/wp-admin/admin-ajax.php?action=handle_search_query&q=${encodeURIComponent(query)}`);
+                const result = await response.json();
+                
+                if (response.ok && result.success) {
+                    displayMessage('success', 'Search results fetched successfully.');
+                    searchData = result.data;
+                    console.log("Search results:", searchData);
+                    displayResults();
+                } else {
+                    displayMessage('error', result.data || 'Failed to fetch search results.');
+                }
+            } catch (error) {
+                displayMessage('error', 'An error occurred while fetching search results.');
+            }
+        }
+        
+        function displayResults() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+        
+            if (searchData.length === 0) {
+                resultsDiv.textContent = 'No results found.';
+                return;
+            }
+        
+            const ul = document.createElement('ul');
+            searchData.forEach((item, index) => {
+                const li = document.createElement('li');
+                const playerContainerId = `result-player-${index}`;
+                const playerDiv = document.createElement('div');
+                playerDiv.id = playerContainerId;
+                playerDiv.classList.add('player-container');
+        
+                const embedUrl = `https://www.youtube.com/embed/${item.video_id}?start=${Math.floor(parseFloat(item.timestamps[0]))}&rel=0&controls=1`;
+        
+                const iframe = document.createElement('iframe');
+                iframe.src = embedUrl;
+                iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+                iframe.allowFullscreen = true; // Ensure full screen capability
+                iframe.id = `iframe-${index}`;
+        
+                playerDiv.appendChild(iframe);
+                li.appendChild(playerDiv);
+        
+                const occurrencesDropdownContainer = document.createElement('div');
+                occurrencesDropdownContainer.classList.add('occurrences-dropdown-container');
+        
+                const label = document.createElement('label');
+                label.textContent = 'Occurrences:';
+                label.classList.add('occurrences-label');
+                occurrencesDropdownContainer.appendChild(label);
+        
+                const dropdown = document.createElement('div');
+                dropdown.classList.add('timestamps-dropdown');
+        
+                const select = document.createElement('select');
+                select.classList.add('timestamps-dropdown');
+        
+                item.timestamps.forEach(timestamp => {
+                    const option = document.createElement('option');
+                    option.textContent = formatTimestamp(timestamp);
+                    option.value = Math.floor(parseFloat(timestamp));
+                    select.appendChild(option);
+                });
+        
+                select.addEventListener('change', (e) => {
+                    const timestampInSeconds = e.target.value;
+                    const currentIframe = document.getElementById(`iframe-${index}`);
+                    currentIframe.src = `https://www.youtube.com/embed/${item.video_id}?start=${timestampInSeconds}&rel=0&controls=1&autoplay=1`;
+                });
+        
+                dropdown.appendChild(select);
+                occurrencesDropdownContainer.appendChild(dropdown);
+        
+                li.appendChild(occurrencesDropdownContainer);
+                ul.appendChild(li);
+            });
+        
+            resultsDiv.appendChild(ul);
+        }
+         
+         function formatTimestamp(seconds) {
+             const date = new Date(null);
+             date.setSeconds(seconds);
+             return date.toISOString().substr(11, 8);
+         }
+         
+         const query = getQueryParam('q');
+         if (query) {
+             console.log("Search query:", query);
+             document.getElementById('search-query').textContent = `You searched for: ${query}`;
+             fetchSearchResults(query);
+         }
+      </script>
+   </body>
+</html>
